@@ -1,0 +1,1 @@
+Weather map. Test task
