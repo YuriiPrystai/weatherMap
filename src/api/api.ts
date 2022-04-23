@@ -28,14 +28,15 @@ export const sendRequest = async (
     ...headers,
     'Content-Type': BODY_TYPE_JSON,
   }
-
   config.params = { ...config.params, ...query }
 
-  return new Promise((resolve, reject) => {
-    axios.request({ ...config })
+  if (!Object.keys(config.data).length) delete config.data;
+  if (!Object.keys(config.params).length) delete config.params;
+
+  return new Promise<AxiosResponse>((resolve, reject) => {
+    axios.request(config)
       .then((response: AxiosResponse) => {
-        const { data, status, statusText } = response
-        resolve({ data, status, statusText })
+        resolve(response);
       })
       .catch(reject)
   })
