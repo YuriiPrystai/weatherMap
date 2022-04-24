@@ -56,7 +56,10 @@ export interface CitiesListProps {
   cards: CityWeather[],
   dispatch: AppDispatch,
 };
-
+export interface MainPageProps {
+  worldsCities: ICity[] | [],
+  dispatch: AppDispatch,
+};
 export interface CityDetailsProps {
   city: CityWeather | undefined,
   dispatch: AppDispatch,
