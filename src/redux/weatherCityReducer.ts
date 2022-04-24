@@ -9,6 +9,7 @@ export const weatherCityReducer = (
 ) => {
   switch(action.type) {
     case SET_CITY: {
+      if (state.find(city => city.id === action.payload.id)) return state;   
       return [
         ...state,
         action.payload,
