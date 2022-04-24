@@ -1,6 +1,6 @@
 import { ICity } from "country-state-city/dist/lib/interface";
-import { SetWorldsCitiesAC } from "../config/types";
 
+import { SetWorldsCitiesAC } from "../config/types";
 import { SET_CITIES } from "./actionTypes";
 
 const initState: ICity[] = [];
