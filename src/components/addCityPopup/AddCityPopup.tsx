@@ -68,27 +68,29 @@ const AddCityPopup = (props: AddCityPopupProps) => {
           <Typography align='center' variant="h6" component="h2" sx={{ mb: 2 }}>
             Select a new City to add
           </Typography>
-          {
-            isLoading
-            ? <CircularProgress />
-            : (
-              <FormControl fullWidth sx={{ mb: 3 }}>
-                <InputLabel id="demo-simple-select-label">City</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  value={cityName}
-                  label="City"
-                  onChange={handleChange}
-                >
-                  {
-                    props.cities.map((city) => {
-                      return <MenuItem key={nanoid()} value={city.name}>{city.name}</MenuItem>
-                    })
-                  }
-                </Select>
-              </FormControl>
-            )
-          }
+          <Box  sx={{ mb: 2 }}>
+            {
+              isLoading
+              ? <CircularProgress />
+              : (
+                <FormControl fullWidth sx={{ mb: 3 }}>
+                  <InputLabel id="demo-simple-select-label">City</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    value={cityName}
+                    label="City"
+                    onChange={handleChange}
+                  >
+                    {
+                      props.cities.map((city) => {
+                        return <MenuItem key={nanoid()} value={city.name}>{city.name}</MenuItem>
+                      })
+                    }
+                  </Select>
+                </FormControl>
+              )
+            }
+          </Box>
           <Button
             size="medium"
             variant="contained"
