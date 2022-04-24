@@ -20,6 +20,9 @@ import { Box } from '@mui/system';
 import { CityWeather } from '../config/types';
 import { deleteWeatherCity } from '../redux/actionCreators';
 import { fetchCityToRefresh } from '../redux/thunks';
+import { Link } from 'react-router-dom';
+import { ROUTE_NAMES, ROUTE_PATH_PARAMS } from '../config/config';
+import { NoEncryption } from '@mui/icons-material';
 
 export default function CityCard(props: { card: CityWeather }) {
 
@@ -112,17 +115,27 @@ return (
             </IconButton>
           )
         }
-        <Button
-          sx={{
+        <Link
+          to={ROUTE_NAMES.CITY.DETAILS.replace(
+            `:${ROUTE_PATH_PARAMS.CITY.ID}`,
+            `${props.card.id}`)}
+          style={{
+            textDecoration: 'none',
             width: '70%',
-            borderRadius: '0',
           }}
-          size="medium"
-          variant="contained"
-          color="success"
         >
-          View details
-        </Button>
+           <Button
+            sx={{
+              width: '100%',
+              borderRadius: '0',
+            }}
+            size="medium"
+            variant="contained"
+            color="success"
+          >
+            View details
+          </Button>
+        </Link>
         <Button
           sx={{
             width: '70%',

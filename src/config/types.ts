@@ -56,6 +56,11 @@ export interface CitiesListProps {
   dispatch: AppDispatch,
 };
 
+export interface CityDetailsProps {
+  city: CityWeather | undefined,
+  dispatch: AppDispatch,
+};
+
 // Reducers
 export interface RootState {
   worldsCities: ICity[],
