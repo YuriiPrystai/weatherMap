@@ -11,7 +11,6 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AirIcon from '@mui/icons-material/Air';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
-import Header from '../components/Header';
 import { ROUTE_PATH_PARAMS } from '../config/config';
 import { CityDetailsProps, CityWeather, RootState } from '../config/types';
 
@@ -33,7 +32,6 @@ const CityDetails = (props: CityDetailsProps) => {
 
   return (
     <div>
-      <Header />
       <Box
         sx={{
           p: 3,

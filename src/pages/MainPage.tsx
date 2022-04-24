@@ -4,8 +4,6 @@ import { City }  from 'country-state-city';
 
 import AddCityPopup from '../components/addCityPopup/AddCityPopup'
 import CitiesList from '../components/CitiesList'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
 import { useDispatch } from 'react-redux';
 import { setWorldsCities } from '../redux/actionCreators';
 import { ICity } from 'country-state-city/dist/lib/interface';
@@ -22,27 +20,23 @@ export default function MainPage() {
   }, []);
 
   return (
-    <>
-      <Header />
-      <Container maxWidth="md" sx={{ mb: 4 }}>
-        <CitiesList />
-        <Box
-          textAlign='right'
+    <Container maxWidth="md" sx={{ mb: 4 }}>
+      <CitiesList />
+      <Box
+        textAlign='right'
+      >
+        <Button
+          variant="contained"
+          color="success"
+          onClick={handleOpen}
         >
-          <Button
-            variant="contained"
-            color="success"
-            onClick={handleOpen}
-          >
-            Add City
-          </Button>
-        </Box>
-        <AddCityPopup
-          open={popupIsOpen}
-          handleClose={handleClose}
-        />
-      </Container>
-      <Footer />
-    </>
+          Add City
+        </Button>
+      </Box>
+      <AddCityPopup
+        open={popupIsOpen}
+        handleClose={handleClose}
+      />
+    </Container>
   )
 }
