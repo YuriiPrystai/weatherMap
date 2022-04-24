@@ -14,12 +14,12 @@ import {
   SelectChangeEvent,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { connect, useDispatch } from 'react-redux';
+import { ICity } from 'country-state-city/dist/lib/interface';
 
 import { AddCityPopupProps, RootState } from '../../config/types';
 import { closeButtonStyle, modalStyle } from './addCityPopupStyles';
-import { connect, useDispatch } from 'react-redux';
-import { ICity } from 'country-state-city/dist/lib/interface';
-import { fetchCity } from '../../redux/actionCreators';
+import { fetchCityToAdd } from '../../redux/thunks';
 
 const AddCityPopup = (props: AddCityPopupProps) => {
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ const AddCityPopup = (props: AddCityPopupProps) => {
   const handleAddCity = (): void => {
     const selectedCity: ICity | undefined = props.cities.find(city => city.name === cityName);
     if (!!selectedCity?.latitude && !!selectedCity?.longitude) {
-      dispatch(fetchCity(
+      dispatch(fetchCityToAdd(
         Number(selectedCity.latitude),
         Number(selectedCity.longitude),
         setIsLoading,

@@ -3,22 +3,35 @@ import {
   Card,
   CardActions,
   CardContent,
+  CircularProgress,
+  Container,
   IconButton,
   Typography,
 } from '@mui/material';
 import React, { useCallback } from 'react'
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { yellow } from '@mui/material/colors';
+import ThermostatIcon from '@mui/icons-material/Thermostat';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import AirIcon from '@mui/icons-material/Air';
+import { useDispatch } from 'react-redux';
+import { Box } from '@mui/system';
 
 import { CityWeather } from '../config/types';
-import { useDispatch } from 'react-redux';
 import { deleteWeatherCity } from '../redux/actionCreators';
+import { fetchCityToRefresh } from '../redux/thunks';
 
 export default function CityCard(props: { card: CityWeather }) {
 
 const dispatch = useDispatch();
-const handleDeveteCard = useCallback((id: number) => {
-  dispatch(deleteWeatherCity(id));
+const [isLoading, setIsLoading] = React.useState<boolean>(false);
+
+const handleDeveteCard = useCallback(() => {
+  dispatch(deleteWeatherCity(props.card));
+}, []);
+
+const handleRefresh = useCallback(() => {
+  dispatch(fetchCityToRefresh(props.card.coord.lat, props.card.coord.lon, setIsLoading));
 }, []);
 
 return (
@@ -36,32 +49,94 @@ return (
       },
     }}
   >
-    <CardContent sx={{ flexGrow: 1 }}>
-      <Typography gutterBottom variant="h5" component="h2">
-        {props.card.name}
-      </Typography>
-      <Typography>
-        Temperature {props.card.main.temp}
-      </Typography>
-    </CardContent>
-    <CardActions
+    <Box
       sx={{
-        justifyContent: 'flex-end'
+        display: 'flex',
       }}
     >
-      <Button size="medium" variant="contained" color="success">View</Button>
-      <Button
-        size="medium"
-        variant="contained"
-        color="error"
-        onClick={() => handleDeveteCard(props.card.id)}
+      <CardContent
+        sx={{
+          flexGrow: 1,
+          width: '50%',
+        }}
       >
-        Delete
-      </Button>
-      <IconButton color="primary" aria-label="upload picture" component="span">
-        <RefreshIcon />
-      </IconButton>
-    </CardActions>
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="h2"
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <LocationOnIcon />{props.card.name}
+        </Typography>
+        <Typography
+          component="h4"
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            mb: 1,
+          }}
+        >
+          <ThermostatIcon />{props.card.main.temp}&deg;
+        </Typography>
+        <Typography
+          component="h4"
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <AirIcon />{props.card.wind.speed} m/s
+        </Typography>
+      </CardContent>
+      <CardActions
+        sx={{
+          flexDirection: 'column',
+          alignItems: 'flex-end',
+          width: '50%',
+        }}
+      >
+        {
+          isLoading
+          ? <CircularProgress sx={{ p: 1 }} />
+          : (
+            <IconButton
+              color="primary"
+              aria-label="refresh"
+              component="span"
+              onClick={handleRefresh}
+            >
+              <RefreshIcon />
+            </IconButton>
+          )
+        }
+        <Button
+          sx={{
+            width: '70%',
+            borderRadius: '0',
+          }}
+          size="medium"
+          variant="contained"
+          color="success"
+        >
+          View details
+        </Button>
+        <Button
+          sx={{
+            width: '70%',
+            borderRadius: '0',
+          }}
+          size="medium"
+          variant="contained"
+          color="error"
+          onClick={handleDeveteCard}
+        >
+          Delete city
+        </Button>
+      </CardActions>
+    </Box>
   </Card>       
   )
 }
