@@ -4,7 +4,6 @@ import {
   CardActions,
   CardContent,
   CircularProgress,
-  Container,
   IconButton,
   Typography,
 } from '@mui/material';
@@ -16,13 +15,12 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AirIcon from '@mui/icons-material/Air';
 import { useDispatch } from 'react-redux';
 import { Box } from '@mui/system';
+import { Link } from 'react-router-dom';
 
 import { CityWeather } from '../config/types';
 import { deleteWeatherCity } from '../redux/actionCreators';
 import { fetchCityToRefresh } from '../redux/thunks';
-import { Link } from 'react-router-dom';
 import { ROUTE_NAMES, ROUTE_PATH_PARAMS } from '../config/config';
-import { NoEncryption } from '@mui/icons-material';
 
 export default function CityCard(props: { card: CityWeather }) {
 
