@@ -17,10 +17,9 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import { AddCityPopupProps, RootState } from '../../config/types';
 import { closeButtonStyle, modalStyle } from './addCityPopupStyles';
-import { getWeather } from '../../api/queries';
 import { connect, useDispatch } from 'react-redux';
 import { ICity } from 'country-state-city/dist/lib/interface';
-import { setWeatherCity } from '../../redux/actionCreators';
+import { fetchCity } from '../../redux/actionCreators';
 
 const AddCityPopup = (props: AddCityPopupProps) => {
   const dispatch = useDispatch();
@@ -34,13 +33,13 @@ const AddCityPopup = (props: AddCityPopupProps) => {
   const handleAddCity = (): void => {
     const selectedCity: ICity | undefined = props.cities.find(city => city.name === cityName);
     if (!!selectedCity?.latitude && !!selectedCity?.longitude) {
-      setIsLoading(true);
-      getWeather(Number(selectedCity.latitude), Number(selectedCity.longitude))
-        .then((response) => {
-          setIsLoading(false);
-          dispatch(setWeatherCity(response.data));
-          props.handleClose();
-        });
+      dispatch(fetchCity(
+        Number(selectedCity.latitude),
+        Number(selectedCity.longitude),
+        setIsLoading,
+        props.handleClose,
+      ));
+      setCityName('');
     };
   };  
 

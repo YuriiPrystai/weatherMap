@@ -6,4 +6,4 @@ export const SET_CITY: string = 'SET_CITY';
 export const DELETE_CITY: string = 'DELETE_CITY';
 
 // Thunk
-export const FETCH_CITIES: string = 'FETCH_CITIES';
+export const FETCH_CITY: string = 'FETCH_CITY';

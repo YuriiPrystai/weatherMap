@@ -1,5 +1,5 @@
 import { ICity } from "country-state-city/dist/lib/interface";
-import { DELETE_CITY, SET_CITIES, SET_CITY } from "../redux/actionTypes";
+import { DELETE_CITY, FETCH_CITY, SET_CITIES, SET_CITY } from "../redux/actionTypes";
 import { AppDispatch } from "../redux/store";
 
 export interface CityWeather {
@@ -75,4 +75,11 @@ export interface SetWeatherCityAC {
 export interface DeleteWeatherCityAC {
   type: typeof DELETE_CITY,
   payload: number,
+}
+export interface FetchCityAC {
+  type: typeof FETCH_CITY,
+  payload: {
+    lat: number,
+    lon: number,
+  },
 }
