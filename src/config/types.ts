@@ -58,6 +58,7 @@ export interface CitiesListProps {
 };
 export interface MainPageProps {
   worldsCities: ICity[] | [],
+  weatherCities: CityWeather[] | [],
   dispatch: AppDispatch,
 };
 export interface CityDetailsProps {

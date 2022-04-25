@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box, CssBaseline } from '@mui/material';
 import {
-  BrowserRouter,
   Route,
   Routes,
+  HashRouter,
 } from 'react-router-dom'
 
 import MainPage from './pages/MainPage';
@@ -14,14 +14,14 @@ import Footer from './components/Footer';
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          minHeight: '100vh',
-        }}
-      >
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+      }}
+    >
+      <HashRouter basename={ROUTE_NAMES.HOME}>
         <CssBaseline />
         <Header />
         <Routes>
@@ -29,8 +29,8 @@ const App = () => {
           <Route path={ROUTE_NAMES.CITY.DETAILS} element={<CityDetails />}/>
         </Routes>
         <Footer />
-      </Box>
-    </BrowserRouter>
+      </HashRouter>
+    </Box>
   );
 }
 
