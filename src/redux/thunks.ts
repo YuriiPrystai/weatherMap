@@ -8,8 +8,8 @@ import { refreshWeatherCity, setWeatherCity } from "./actionCreators";
 export const fetchCityToAdd = (
   lat: number,
   lon: number,
-  setIsLoading: Function,
-  handleClose: Function,
+  setIsLoading: (value: boolean) => void,
+  handleClose: () => void,
 ): any => (
   (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     setIsLoading(true);
@@ -25,7 +25,7 @@ export const fetchCityToAdd = (
 export const fetchCityToRefresh = (
   lat: number,
   lon: number,
-  setIsLoading: Function,
+  setIsLoading: (value: boolean) => void,
 ): any => (
   (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     setIsLoading(true);
@@ -39,7 +39,7 @@ export const fetchCityToRefresh = (
 
 export const fetchAllCitiesToRefresh = (
   weatherCities: CityWeather[],
-  setIsLoading: Function,
+  setIsLoading: (value: boolean) => void,
 ): any => (
   (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     setIsLoading(true);

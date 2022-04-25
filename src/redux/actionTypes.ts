@@ -1,10 +1,10 @@
 // World's cities
-export const SET_CITIES: string = 'SET_CITIES';
+export const SET_CITIES = 'SET_CITIES';
 
 // Weather city
-export const SET_CITY: string = 'SET_CITY';
-export const DELETE_CITY: string = 'DELETE_CITY';
-export const REFRESH_CITY: string = 'REFRESH_CITY';
+export const SET_CITY = 'SET_CITY';
+export const DELETE_CITY = 'DELETE_CITY';
+export const REFRESH_CITY = 'REFRESH_CITY';
 
 // Thunk
-export const FETCH_CITY: string = 'FETCH_CITY';
+export const FETCH_CITY = 'FETCH_CITY';

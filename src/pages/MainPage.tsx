@@ -26,13 +26,13 @@ const MainPage = (props: MainPageProps) => {
     if (!props.worldsCities.length) {
       const cities: ICity[] | undefined = City.getCitiesOfCountry('UA');  
       dispatch(setWorldsCities(cities));
-    };
+    }
     if (props.weatherCities.length) {
       dispatch(fetchAllCitiesToRefresh(
         props.weatherCities,
         setIsLoading,
       ));
-    };
+    }
   }, []);
 
   return (

@@ -44,28 +44,26 @@ export interface CityWeather {
     speed: number;
     deg: number;
   };
-};
+}
 export interface AddCityPopupProps {
   open: boolean,
   handleClose: () => void,
   cities: ICity[],
   dispatch: AppDispatch,
-};
-
+}
 export interface CitiesListProps {
   cards: CityWeather[],
   dispatch: AppDispatch,
-};
+}
 export interface MainPageProps {
   worldsCities: ICity[] | [],
   weatherCities: CityWeather[] | [],
   dispatch: AppDispatch,
-};
+}
 export interface CityDetailsProps {
   city: CityWeather | undefined,
   dispatch: AppDispatch,
-};
-
+}
 // Reducers
 export interface RootState {
   worldsCities: ICity[],
