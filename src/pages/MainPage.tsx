@@ -5,12 +5,9 @@ import {
   Container,
 } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import { City }  from 'country-state-city';
 import { useDispatch, connect } from 'react-redux';
-import { ICity } from 'country-state-city/dist/lib/interface';
 
 import AddCityPopup from '../components/addCityPopup/AddCityPopup';
-import { setWorldsCities } from '../redux/actionCreators';
 import CitiesList from '../components/CitiesList';
 import { MainPageProps, RootState } from '../config/types';
 import { fetchAllCitiesToRefresh } from '../redux/thunks';
@@ -23,10 +20,6 @@ const MainPage = (props: MainPageProps) => {
   const handleClose: () => void = () => setPopupIsOpen(false);
 
   useEffect(() => {
-    if (!props.worldsCities.length) {
-      const cities: ICity[] | undefined = City.getCitiesOfCountry('UA');  
-      dispatch(setWorldsCities(cities));
-    }
     if (props.weatherCities.length) {
       dispatch(fetchAllCitiesToRefresh(
         props.weatherCities,
