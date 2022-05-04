@@ -5,14 +5,14 @@ import {
 } from '@mui/material';
 import React from 'react';
 
-export default function Header() {
-  return (
-    <AppBar position="relative">
-      <Toolbar>
-        <Typography variant="h5" color="inherit" noWrap>
-          Weathering Map
-        </Typography>
-      </Toolbar>
-    </AppBar>
-  );
-}
+const Header = () => (
+  <AppBar position="relative">
+    <Toolbar>
+      <Typography variant="h5" color="inherit" noWrap>
+        Weathering Map
+      </Typography>
+    </Toolbar>
+  </AppBar>
+);
+
+export default Header;

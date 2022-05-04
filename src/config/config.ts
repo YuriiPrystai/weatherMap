@@ -6,7 +6,7 @@ export const ROUTE_PATH_PARAMS = {
   CITY: {
     ID: 'cityId',
   },
-}
+};
 
 export const ROUTE_NAMES = {
   HOME: '/',

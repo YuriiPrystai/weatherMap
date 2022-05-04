@@ -31,60 +31,52 @@ const itemStyle = {
 const CityDetails = (props: CityDetailsProps) => {  
 
   return (
-    <div>
-      <Box
-        sx={{
-          p: 3,
-          pr: 30,
-          pl: 30,
-        }}
-      >
-        {
-          props.city && Object.keys(props.city).length
-          ? (
-            <>
-              <Typography align='center' component="h4" variant='h4' mb={3}>
-                Weather in {props.city.name}<LocationOnIcon />
-              </Typography>
-              <Container
-                sx={{
-                  borderRadius: '10px',
-                  boxShadow: '0 0 20px 2px #EBDE6CFF',
-                  padding: '20px 40px',
-                }}
-              >
-                <Typography align='left' component="div" variant='body1' sx={{ ...itemStyle, justifyContent: 'space-around' }}>
-                  <Box sx={alignStyle}><ThermostatIcon /> Air temperature {props.city.main.temp}&deg;C</Box>
-                  <Box sx={alignStyle}><ThermostatIcon /> Air temperature {Math.round(props.city.main.temp * 33.8)}&deg;F</Box>
-                </Typography>
-                <Typography align='left' component="div" variant='body1' sx={{ ...itemStyle, justifyContent: 'space-around' }}>
-                  <Box sx={alignStyle}><ThermostatIcon /> Air temperature (feels like) {props.city.main.feels_like}&deg;C</Box>
-                  <Box sx={alignStyle}><ThermostatIcon /> Air temperature (feels like) {Math.round(props.city.main.feels_like * 33.8)}&deg;F</Box>
-                </Typography>
-                <Typography align='left' component="div" variant='body1' sx={{ ...itemStyle, justifyContent: 'space-around' }}>
-                  <Box sx={alignStyle}><AirIcon /> Wind speed {props.city.wind.speed}m/s</Box>
-                  <Box sx={alignStyle}><AirIcon /> Wind speed {Math.round(props.city.main.temp * 3.6)}km/h</Box>
-                </Typography>
-                <Typography align='left' component="div" variant='body1' sx={itemStyle}>
-                  <Box sx={alignStyle}>Pressure {Math.round(props.city.main.pressure / 1.33322387415)}mm Hg</Box>
-                </Typography>
-                <Typography align='left' component="div" variant='body1' sx={{ ...itemStyle, justifyContent: 'space-around' }}>
-                  <Box sx={alignStyle}><VisibilityIcon /> Visibility {props.city.visibility} meters</Box>
-                  <Box sx={alignStyle}><VisibilityIcon /> Visibility {Math.round(props.city.visibility * 3.2808399)} feets</Box>
-                </Typography>
-              </Container>
-            </>
-          )
-          : (
-            <Typography align='center' component="h4" variant='h4'>
-              There is no information about weather forecast
+    <Box sx={{ p: 3, pr: 30, pl: 30 }}>
+      {
+        props.city && Object.keys(props.city).length
+        ? (
+          <>
+            <Typography align='center' component="h4" variant='h4' mb={3}>
+              Weather in {props.city.name}<LocationOnIcon />
             </Typography>
-          )
-        }
-      </Box>
-    </div>
+            <Container
+              sx={{
+                borderRadius: '10px',
+                boxShadow: '0 0 20px 2px #EBDE6CFF',
+                padding: '20px 40px',
+              }}
+            >
+              <Typography align='left' component="div" variant='body1' sx={{ ...itemStyle, justifyContent: 'space-around' }}>
+                <Box sx={alignStyle}><ThermostatIcon /> Air temperature {props.city.main.temp}&deg;C</Box>
+                <Box sx={alignStyle}><ThermostatIcon /> Air temperature {Math.round(props.city.main.temp * 33.8)}&deg;F</Box>
+              </Typography>
+              <Typography align='left' component="div" variant='body1' sx={{ ...itemStyle, justifyContent: 'space-around' }}>
+                <Box sx={alignStyle}><ThermostatIcon /> Air temperature (feels like) {props.city.main.feels_like}&deg;C</Box>
+                <Box sx={alignStyle}><ThermostatIcon /> Air temperature (feels like) {Math.round(props.city.main.feels_like * 33.8)}&deg;F</Box>
+              </Typography>
+              <Typography align='left' component="div" variant='body1' sx={{ ...itemStyle, justifyContent: 'space-around' }}>
+                <Box sx={alignStyle}><AirIcon /> Wind speed {props.city.wind.speed}m/s</Box>
+                <Box sx={alignStyle}><AirIcon /> Wind speed {Math.round(props.city.main.temp * 3.6)}km/h</Box>
+              </Typography>
+              <Typography align='left' component="div" variant='body1' sx={itemStyle}>
+                <Box sx={alignStyle}>Pressure {Math.round(props.city.main.pressure / 1.33322387415)}mm Hg</Box>
+              </Typography>
+              <Typography align='left' component="div" variant='body1' sx={{ ...itemStyle, justifyContent: 'space-around' }}>
+                <Box sx={alignStyle}><VisibilityIcon /> Visibility {props.city.visibility} meters</Box>
+                <Box sx={alignStyle}><VisibilityIcon /> Visibility {Math.round(props.city.visibility * 3.2808399)} feets</Box>
+              </Typography>
+            </Container>
+          </>
+        )
+        : (
+          <Typography align='center' component="h4" variant='h4'>
+            There is no information about weather forecast
+          </Typography>
+        )
+      }
+    </Box>
   )
-}
+};
 
 export default connect(
   (state: RootState) => {

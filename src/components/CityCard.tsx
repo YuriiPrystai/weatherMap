@@ -50,11 +50,7 @@ return (
       },
     }}
   >
-    <Box
-      sx={{
-        display: 'flex',
-      }}
-    >
+    <Box sx={{ display: 'flex' }}>
       <CardContent
         sx={{
           flexGrow: 1,
@@ -150,4 +146,4 @@ return (
     </Box>
   </Card>       
   )
-}
+};

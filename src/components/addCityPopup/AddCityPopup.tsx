@@ -83,66 +83,61 @@ const AddCityPopup = (props: AddCityPopupProps) => {
   );
 
   return (
-    <div>
-      <Modal
-        open={props.open}
-        onClose={() => {
-          props.handleClose();
-          setCityName('');
-        }}
-      >
-        <Box sx={modalStyle}>
-          <IconButton
-            color="error"
-            aria-label="close picture"
-            component="span"
-            sx={closeButtonStyle}
-            onClick={() => {
-              props.handleClose();
-              setCityName('');
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
-          <Typography align='center' variant="h6" component="h2" sx={{ mb: 2 }}>
-            Select a new City to add
-          </Typography>
-          <Box>
-            {
-              isLoading
-              ? <CircularProgress />
-              : (
-                <FormControl fullWidth sx={{ mb: 3 }}>
-                  <AsyncSelect
-                    components={{ MenuList }}
-                    cacheOptions
-                    defaultOptions
-                    loadOptions={loadOptions}
-                    onChange={(newValue: SingleValue<ICity>) => {   
-                      setCityName(newValue ? newValue.name : '');
-                    }}
-                    isSearchable={false}
-                    filterOption={createFilter({ ignoreAccents: false })}
-                  />
-                </FormControl>
-              )
-            }
-          </Box>
-          <Button
-            size="medium"
-            variant="contained"
-            color="success"
-            sx={{ width: '50%' }}
-            disabled={!cityName}
-            onClick={handleAddCity}
-          >
-            ADD
-          </Button>
-        </Box>
-      </Modal>
-    </div>
+    <Modal
+      open={props.open}
+      onClose={() => {
+        props.handleClose();
+        setCityName('');
+      }}
+    >
+      <Box sx={modalStyle}>
+        <IconButton
+          color="error"
+          aria-label="close picture"
+          component="span"
+          sx={closeButtonStyle}
+          onClick={() => {
+            props.handleClose();
+            setCityName('');
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+        <Typography align='center' variant="h6" component="h2" sx={{ mb: 2 }}>
+          Select a new City to add
+        </Typography>
+        {isLoading
+          ? <CircularProgress sx={{ mb: 2 }} />
+          : (
+            <FormControl fullWidth sx={{ mb: 3 }}>
+              <AsyncSelect
+                components={{ MenuList }}
+                cacheOptions
+                defaultOptions
+                loadOptions={loadOptions}
+                onChange={(newValue: SingleValue<ICity>) => {   
+                  setCityName(newValue ? newValue.name : '');
+                }}
+                isSearchable={false}
+                filterOption={createFilter({ ignoreAccents: false })}
+              />
+            </FormControl>
+          )
+        }
+        <Button
+          size="medium"
+          variant="contained"
+          color="success"
+          sx={{ width: '50%' }}
+          disabled={!cityName}
+          onClick={handleAddCity}
+        >
+          ADD
+        </Button>
+      </Box>
+    </Modal>
   );
-}
+};
 
 export default connect(
   (state: RootState) => ({

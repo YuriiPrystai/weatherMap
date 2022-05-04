@@ -30,14 +30,11 @@ const MainPage = (props: MainPageProps) => {
 
   return (
     <Container maxWidth="md" sx={{ mb: 4 }}>
-      {
-        isLoading
-          ? <CircularProgress />
-          : <CitiesList />
+      {isLoading
+        ? <CircularProgress />
+        : <CitiesList />
       }
-      <Box
-        textAlign='right'
-      >
+      <Box textAlign='right'>
         <Button
           variant="contained"
           color="success"
