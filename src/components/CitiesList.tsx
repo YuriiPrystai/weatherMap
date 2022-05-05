@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 
-import CityCard from './CityCard';
+import CityCard from './cityCard/CityCard';
 import {
   CitiesListProps,
   CityWeather,
@@ -23,15 +23,26 @@ const CitiesList = (props: CitiesListProps) => (
           <Typography
             component="p"
             variant="h3"
+            mb={5}
             align="center"
-            color="text.primary"
             gutterBottom
           >
             Weathering Map
           </Typography>
-          {props.cards.map((card: CityWeather) => (
-            <CityCard card={card} key={card.id} />
-          ))}
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              gridRowGap: '2rem',
+              rowGap: '2rem',
+            }}
+          >
+            {props.cards.map((card: CityWeather) => (
+              <CityCard card={card} key={card.id} />
+            ))}
+          </Box>
         </>
       )
       : (
