@@ -25,9 +25,7 @@ export const verticalTextStyle: Record<string, string>  = {
 
 
 export const bgCardImageStyles: Record<string, string | number>  = {
-  margin: 'auto 0',
   position: 'absolute',
-  top: 0, 
-  bottom: 0,
+  bottom: '15px',
   right: '20px',
 };

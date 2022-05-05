@@ -7,7 +7,7 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useDispatch } from 'react-redux';
@@ -27,10 +27,10 @@ import {
   verticalTextStyle,
 } from './cityCardStyles';
 
-const CityCard = (props: { card: CityWeather }) => {
+const CityCard = (props: { card: CityWeather, isMobile: boolean }) => {
 
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const iconCardUrl = require(`../../images/${props.card.weather[0].main}.png`);
 
   const handleDeveteCard = useCallback(() => {
@@ -47,7 +47,7 @@ const CityCard = (props: { card: CityWeather }) => {
       sx={{
         id: props.card.id,
         borderRadius: '20px',
-        width: '44%',
+        width: `${props.isMobile ? '80%' : '44%'}`,
         height: '100%',
       }}
     >
@@ -78,7 +78,7 @@ const CityCard = (props: { card: CityWeather }) => {
           </Typography>
           <Typography
             component="h4"
-            variant="h3"
+            variant={`${props.isMobile ? 'h6' : 'h3'}`}
             sx={{
               display: 'flex',
               alignItems: 'center',
@@ -99,7 +99,7 @@ const CityCard = (props: { card: CityWeather }) => {
             {props.card.weather[0].main}
           </Typography>
           <img
-            height="50%"
+            height={`${props.isMobile ? '40%' : '50%'}`}
             src={iconCardUrl}
             alt="weather icon"
             style={bgCardImageStyles}

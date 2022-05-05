@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -23,8 +23,8 @@ import { setWorldsCities } from '../../redux/actionCreators';
 
 const AddCityPopup = (props: AddCityPopupProps) => {
   const dispatch = useDispatch();
-  const [cityName, setCityName] = React.useState<string>('');
-  const [isLoading, setIsLoading] = React.useState<boolean>(!props.cities);
+  const [cityName, setCityName] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(!props.cities);
 
   const handleAddCity = (): void => {
     const selectedCity: ICity | undefined = props.cities.find(city => city.name === cityName);

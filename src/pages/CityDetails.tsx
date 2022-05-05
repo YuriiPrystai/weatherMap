@@ -1,9 +1,11 @@
 import {
   Box,
+  CircularProgress,
   Container,
+  Paper,
   Typography,
 } from '@mui/material';
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import ThermostatIcon from '@mui/icons-material/Thermostat';
@@ -12,60 +14,79 @@ import AirIcon from '@mui/icons-material/Air';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
 import { ROUTE_PATH_PARAMS } from '../config/config';
-import { CityDetailsProps, CityWeather, RootState } from '../config/types';
+import { CityDetailsProps, CityWeather, DailyForecast, RootState } from '../config/types';
+import { getDailyForecast } from '../api/queries';
+import { AxiosResponse } from 'axios';
+import { DefaultDailyForecast } from '../config/dailyForecastData';
+import { nanoid } from 'nanoid';
 
-const alignStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}
+const CityDetails = (props: CityDetailsProps) => {
 
-const itemStyle = {
-  ...alignStyle,
-  marginBottom: '20px',
-  "&:last-child": {
-    mb: 0,
-  },
-}
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [dailyForecast, setDailyForecast] = useState<DailyForecast[]>([]);
 
-const CityDetails = (props: CityDetailsProps) => {  
+  useMemo(() => {
+    if (props.city) {
+      // getDailyForecast(props.city.coord.lat, props.city.coord.lon)
+      //   .then((response: AxiosResponse) => {
+      //     setDailyForecast(response.data.daily);
+      //   })
+      setDailyForecast(DefaultDailyForecast);
+    };
+  }, [props.city])
 
   return (
-    <Box sx={{ p: 3, pr: 30, pl: 30 }}>
+    <Box sx={{ p: 4 }}>
       {
         props.city && Object.keys(props.city).length
         ? (
           <>
             <Typography align='center' component="h4" variant='h4' mb={3}>
-              Weather in {props.city.name}<LocationOnIcon />
+              Weather in {props.city.name}
             </Typography>
-            <Container
+            <Box
               sx={{
-                borderRadius: '10px',
-                boxShadow: '0 0 20px 2px #EBDE6CFF',
-                padding: '20px 40px',
+                display: 'flex',
+                justifyContent: 'center',
+                flexWrap: 'wrap',
+                '& > :not(style)': {
+                  m: 1,
+                },
               }}
             >
-              <Typography align='left' component="div" variant='body1' sx={{ ...itemStyle, justifyContent: 'space-around' }}>
-                <Box sx={alignStyle}><ThermostatIcon /> Air temperature {props.city.main.temp}&deg;C</Box>
-                <Box sx={alignStyle}><ThermostatIcon /> Air temperature {Math.round(props.city.main.temp * 33.8)}&deg;F</Box>
-              </Typography>
-              <Typography align='left' component="div" variant='body1' sx={{ ...itemStyle, justifyContent: 'space-around' }}>
-                <Box sx={alignStyle}><ThermostatIcon /> Air temperature (feels like) {props.city.main.feels_like}&deg;C</Box>
-                <Box sx={alignStyle}><ThermostatIcon /> Air temperature (feels like) {Math.round(props.city.main.feels_like * 33.8)}&deg;F</Box>
-              </Typography>
-              <Typography align='left' component="div" variant='body1' sx={{ ...itemStyle, justifyContent: 'space-around' }}>
-                <Box sx={alignStyle}><AirIcon /> Wind speed {props.city.wind.speed}m/s</Box>
-                <Box sx={alignStyle}><AirIcon /> Wind speed {Math.round(props.city.main.temp * 3.6)}km/h</Box>
-              </Typography>
-              <Typography align='left' component="div" variant='body1' sx={itemStyle}>
-                <Box sx={alignStyle}>Pressure {Math.round(props.city.main.pressure / 1.33322387415)}mm Hg</Box>
-              </Typography>
-              <Typography align='left' component="div" variant='body1' sx={{ ...itemStyle, justifyContent: 'space-around' }}>
-                <Box sx={alignStyle}><VisibilityIcon /> Visibility {props.city.visibility} meters</Box>
-                <Box sx={alignStyle}><VisibilityIcon /> Visibility {Math.round(props.city.visibility * 3.2808399)} feets</Box>
-              </Typography>
-            </Container>
+              {
+                !Object.keys(dailyForecast).length
+                  ? <CircularProgress />
+                  : dailyForecast.map((dayForecast) => {
+                    const date = new Date(dayForecast.dt * 1000);        
+                    return (
+                      <Paper key={nanoid()} elevation={10} sx={{ p: 1 }}>
+                        {date.toLocaleDateString('en-GB')}
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <img
+                            src={`http://openweathermap.org/img/wn/${dayForecast.weather[0].icon}@2x.png`}
+                            alt="weather icon"
+                          />
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              flexDirection: 'column',
+                            }}
+                          >
+                            <Typography variant='h6'>{dayForecast.temp.max}&deg;</Typography>
+                            <Typography>{dayForecast.temp.min}&deg;</Typography>
+                          </Box>
+                        </Box>
+                      </Paper>
+                    )
+                  })
+              }
+            </Box>
           </>
         )
         : (
