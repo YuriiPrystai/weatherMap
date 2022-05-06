@@ -4,12 +4,12 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 const Copyright = () => {
 
-  const isMobile = useMediaQuery('(max-width: 900px)');
+  const isTablet = useMediaQuery('(max-width: 900px)');
 
   return (
     <Box sx={{ mt: 'auto' }}>
       <Typography
-        variant={`${isMobile ? 'body2' : 'h6' }`}
+        variant={`${isTablet ? 'body2' : 'h6' }`}
         align="center"
         component="footer"
         bgcolor="#1976d2"

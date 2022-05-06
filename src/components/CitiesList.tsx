@@ -12,14 +12,14 @@ import {
 
 const CitiesList = (props: CitiesListProps) => {
 
-  const isMobile = useMediaQuery('(max-width: 900px)');
+  const isTablet = useMediaQuery('(max-width: 900px)');
 
   return (
     <Box
       sx={{
         bgcolor: 'white',
-        pt: 5,
-        pb: 7,
+        pt: isTablet ? 3 : 5,
+        pb: isTablet ? 3 : 5,
       }}
     >
       {props.cards.length
@@ -27,8 +27,8 @@ const CitiesList = (props: CitiesListProps) => {
           <>
             <Typography
               component="p"
-              variant={`${isMobile ? 'h4' : 'h3'}`}
-              mb={5}
+              variant={`${isTablet ? 'h5' : 'h3'}`}
+              mb={isTablet ? 3 : 5}
               align="center"
               gutterBottom
             >
@@ -37,19 +37,19 @@ const CitiesList = (props: CitiesListProps) => {
             <Box
               sx={{
                 display: 'flex',
-                flexDirection: `${isMobile ? 'column' : 'row'}`,
+                flexDirection: `${isTablet ? 'column' : 'row'}`,
                 flexWrap: 'wrap',
                 justifyContent: 'space-around',
                 alignItems: 'center',
-                gridRowGap: '2rem',
-                rowGap: '2rem',
+                gridRowGap: `${isTablet ? '1rem' : '2rem'}`,
+                rowGap: `${isTablet ? '1rem' : '2rem'}`,
               }}
             >
               {props.cards.map((card: CityWeather) => (
                 <CityCard
                   card={card}
                   key={card.id}
-                  isMobile={isMobile}
+                  isTablet={isTablet}
                 />
               ))}
             </Box>

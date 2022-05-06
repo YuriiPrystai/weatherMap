@@ -11,7 +11,7 @@ import React, { useCallback, useState } from 'react';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useDispatch } from 'react-redux';
-import { Box } from '@mui/system';
+import { Box, fontSize } from '@mui/system';
 import { Link } from 'react-router-dom';
 import { blueGrey } from '@mui/material/colors';
 
@@ -27,7 +27,7 @@ import {
   verticalTextStyle,
 } from './cityCardStyles';
 
-const CityCard = (props: { card: CityWeather, isMobile: boolean }) => {
+const CityCard = (props: { card: CityWeather, isTablet: boolean }) => {
 
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -47,7 +47,7 @@ const CityCard = (props: { card: CityWeather, isMobile: boolean }) => {
       sx={{
         id: props.card.id,
         borderRadius: '20px',
-        width: `${props.isMobile ? '80%' : '44%'}`,
+        width: `${props.isTablet ? '80%' : '44%'}`,
         height: '100%',
       }}
     >
@@ -65,11 +65,12 @@ const CityCard = (props: { card: CityWeather, isMobile: boolean }) => {
             component="h2"
             sx={{
               display: 'flex',
-              pl: 2,
+              pl: props.isTablet ? 1 : 2,
               pt: 1,
               pb: 1,
               m: 0,
               alignItems: 'center',
+              fontSize: props.isTablet ? '0.7rem' : '0.875rem',
               textDecoration: 'underline',
               bgcolor: blueGrey[100],
             }}
@@ -78,11 +79,11 @@ const CityCard = (props: { card: CityWeather, isMobile: boolean }) => {
           </Typography>
           <Typography
             component="h4"
-            variant={`${props.isMobile ? 'h6' : 'h3'}`}
+            variant={`${props.isTablet ? 'h6' : 'h3'}`}
             sx={{
               display: 'flex',
               alignItems: 'center',
-              pl: 2,
+              pl: props.isTablet ? 1 : 2,
             }}
           >
             {props.card.main.temp}&nbsp;&deg;C
@@ -92,14 +93,14 @@ const CityCard = (props: { card: CityWeather, isMobile: boolean }) => {
             sx={{
               display: 'flex',
               alignItems: 'center',
-              pl: 2,
+              pl: props.isTablet ? 1 : 2,
               textTransform: 'capitalize',
             }}
           >
             {props.card.weather[0].main}
           </Typography>
           <img
-            height={`${props.isMobile ? '40%' : '50%'}`}
+            height={`${props.isTablet ? '40%' : '50%'}`}
             src={iconCardUrl}
             alt="weather icon"
             style={bgCardImageStyles}
@@ -150,7 +151,10 @@ const CityCard = (props: { card: CityWeather, isMobile: boolean }) => {
             >
               <Typography
                 component="span"
-                sx={verticalTextStyle}
+                sx={{
+                  ...verticalTextStyle,
+                  fontSize: props.isTablet ? '0.7rem' : '1rem' ,
+                }}
               >
                 View
               </Typography>
@@ -165,7 +169,10 @@ const CityCard = (props: { card: CityWeather, isMobile: boolean }) => {
           >
             <Typography
               component="span"
-              sx={verticalTextStyle}
+              sx={{
+                ...verticalTextStyle,
+                fontSize: props.isTablet ? '0.7rem' : '1rem' ,
+              }}
             >
               Del
             </Typography>
