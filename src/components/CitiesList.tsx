@@ -9,10 +9,11 @@ import {
   CityWeather,
   RootState,
 } from '../config/types';
+import { TABLET_MEDIA_QUERY } from '../config/config';
 
 const CitiesList = (props: CitiesListProps) => {
 
-  const isTablet = useMediaQuery('(max-width: 900px)');
+  const isTablet = useMediaQuery(TABLET_MEDIA_QUERY);
 
   return (
     <Box

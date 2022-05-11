@@ -2,9 +2,11 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
+import { TABLET_MEDIA_QUERY } from '../config/config';
+
 const Copyright = () => {
 
-  const isTablet = useMediaQuery('(max-width: 900px)');
+  const isTablet = useMediaQuery(TABLET_MEDIA_QUERY);
 
   return (
     <Box sx={{ mt: 'auto' }}>

@@ -14,3 +14,9 @@ export const ROUTE_NAMES = {
     DETAILS: `/city/:${ROUTE_PATH_PARAMS.CITY.ID}/details`,
   },
 };
+
+export const CAROUSEL_ITEM_HEIGHT: number = 250;
+export const CAROUSEL_ITEM_HEADER_HEIGHT: number = CAROUSEL_ITEM_HEIGHT * 0.34;
+export const CAROUSEL_ITEM_COLOR_HEIGHT: number = CAROUSEL_ITEM_HEIGHT - CAROUSEL_ITEM_HEADER_HEIGHT;
+
+export const TABLET_MEDIA_QUERY: string = '(max-width: 900px)';

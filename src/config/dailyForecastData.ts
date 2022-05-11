@@ -1,5 +1,6 @@
 import { nanoid } from "nanoid";
-import { DailyForecast } from "./types";
+
+import { DailyForecast, HourlyForecast } from "./types";
 
 export const DefaultDailyForecast: DailyForecast[] = [
   {
@@ -283,3 +284,36 @@ export const DefaultDailyForecast: DailyForecast[] = [
     wind_speed: 4.12,
   },
 ];
+
+const DefaultHourlyForecastOneHour: any = {
+  clouds: 53,
+  dew_point: 10.7,
+  dt: 1652094000,
+  feels_like: 15.45,
+  humidity: 71,
+  pop: 0.99,
+  pressure: 1025,
+  rain: {
+    '1h': 0.55,
+  },
+  temp: 15.95,
+  uvi: 4.32,
+  visibility: 9835,
+  weather: [
+    {
+      description: 'Clear',
+      icon: '01d',
+      id: Number(nanoid()),
+      main: 'Clear',
+    },
+  ],
+  wind_deg: 18,
+  wind_gust: 3.22,
+  wind_speed: 2.84,
+};
+
+let DefaultHourlyForecast: HourlyForecast[] = [];
+for (let i = 0; i < 48; i++) {
+  DefaultHourlyForecast.push(DefaultHourlyForecastOneHour);
+};
+export { DefaultHourlyForecast };

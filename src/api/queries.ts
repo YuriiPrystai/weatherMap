@@ -8,5 +8,5 @@ export const getWeather = (lat: number, lon: number) => sendRequest(
 
 export const getDailyForecast = (lat: number, lon: number) => sendRequest(
   'GET',
-  `/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&appid=${APP_ID}&units=metric`,
+  `/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${APP_ID}&units=metric`,
 );

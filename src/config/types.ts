@@ -87,6 +87,31 @@ export interface DailyForecast {
   wind_speed: number;
 };
 
+export interface HourlyForecast {
+  clouds: number;
+  dew_point: number;
+  dt: number;
+  feels_like: number;
+  humidity: number;
+  pop: number;
+  pressure: number;
+  rain: {
+    [key: string]: number;
+  };
+  temp: number;
+  uvi: number;
+  visibility: number;
+  weather: Weather[];
+  wind_deg: number;
+  wind_gust: number;
+  wind_speed: number;
+};
+
+export interface HourlyItemHeight {
+  minTemp: number,
+  maxTemp: number,
+};
+
 export interface AddCityPopupProps {
   open: boolean,
   handleClose: () => void,
@@ -144,3 +169,11 @@ export interface FetchCityAC {
     lon: number,
   },
 };
+// Carousel
+export interface CarouselCardProps {
+  onClick: Function,
+  selected: boolean,
+  data: HourlyForecast,
+  hourlyItemHeight: HourlyItemHeight | undefined,
+  itemId: string,
+}
